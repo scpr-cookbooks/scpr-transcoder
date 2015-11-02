@@ -24,4 +24,13 @@ describe 'scpr-transcoder::default' do
     it { should be_running }
   end
 
+  # consul should have a healthy service
+  describe command("/etc/consul_checks/transcoder-prod") do
+    its(:exit_status) { should eq 0 }
+  end
+
+  describe command("curl http://localhost:8500/v1/catalog/service/transcoder-prod") do
+    its(:exit_status) { should eq 0 }
+    its(:stdout) { should contain '"ServiceName":"transcoder-prod"'}
+  end
 end

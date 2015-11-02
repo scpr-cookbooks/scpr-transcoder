@@ -72,10 +72,11 @@ runit_service "transcoder" do
   })
 end
 
-consul_service_def node.scpr_transcoder.consul_service do
-  action    [:create]
-  port      node.scpr_transcoder.port
-  notifies  :reload, "service[consul]"
+scpr_consul_web_service node.scpr_transcoder.consul_service do
+  action      [:create]
+  port        node.scpr_transcoder.port
+  name_suffix false
+  notifies    :reload, "service[consul]"
 end
 
 
