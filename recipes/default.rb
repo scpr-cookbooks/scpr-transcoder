@@ -57,7 +57,7 @@ nodejs_npm "sm-transcoder" do
   version   node.scpr_transcoder.version
   path      node.scpr_transcoder.dir
   user      "transcoder"
-  #notifies  :touch, "file[transcoder-restart]"
+  notifies  :restart, "service[transcoder]"
 end
 
 # -- Set up transcoder service -- #
