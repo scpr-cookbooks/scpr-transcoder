@@ -70,6 +70,7 @@ runit_service "transcoder" do
     user:   node.scpr_transcoder.user,
     port:   node.scpr_transcoder.port,
   })
+  log_size 10*1024*1024
 end
 
 scpr_consul_web_service node.scpr_transcoder.consul_service do
